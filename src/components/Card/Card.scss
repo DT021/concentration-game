@@ -1,20 +1,25 @@
 .card {
-  &.face-down {
-    background-color: yellowgreen;
-  }
-  &.small {
-    font-size: 15px;
-    height: 150px;
-    width: 75px;
-  }
-  &.medium {
-    font-size: 20px;
-    height: 200px;
-    width: 100px;
-  }
-  &.large {
-    font-size: 25px;
-    height: 300px;
-    width: 150px;
-  }
+  // base
+}
+
+.facedown {
+  background-color: yellowgreen;
+}
+
+.small {
+  font-size: 15px;
+  height: 150px;
+  width: 75px;
+}
+
+.medium {
+  font-size: 20px;
+  height: 200px;
+  width: 100px;
+}
+
+.large {
+  font-size: 25px;
+  height: 300px;
+  width: 150px;
 }

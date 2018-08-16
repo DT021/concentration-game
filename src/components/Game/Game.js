@@ -1,4 +1,5 @@
 import React from 'react';
+import get from 'lodash.get';
 
 import Timer from '../Timer/Timer';
 import styles from './Game.scss';
@@ -13,16 +14,28 @@ class Game extends React.Component {
     };
   }
 
+  handleCardClick(index) {
+    // todo integrate with store
+    const cardPositions = get(this.props, 'data.game.cardPositions', []);
+    cardPositions[index] = !!cardPositions[index];
+
+  }
+
   render() {
-    console.log(this.props)
-    const { game } = this.props.data;
-    console.log(this.props)
+    const cards = get(this.props, 'data.game.level.cards', []);
+    const cardPositions = get(this.props, 'data.game.cardPositions', []);
     return (
       <div>
         <h1 className={styles.header}>NYT Games Code Test</h1>
         <Timer/>
         <div className={styles.placeholder}>
-          {game.level.cards.map(card => <Card>{card}</Card>)}
+          {cards.map((card, i) => (
+            <Card
+              initialPosition={cardPositions[i]}
+              symbol={card}
+              onCardClick={this.handleCardClick.bind(this, i)}
+            />
+          ))}
         </div>
       </div>
     );

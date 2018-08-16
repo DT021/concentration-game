@@ -24,7 +24,7 @@ const state = {
     }, // collected from above upon selection,
     clock: 0,  // last recorded time in milliseconds
     failedAttempts: 0, // how many times the user failed trying to match cards
-    cardStates: [false, false, false, false, false, false, false, false], // boolean array where true means card for that index is up
+    cardPositions: [false, false, true, false, true, false, false, false], // boolean array where true means card for that index is up
   },
   options: {
     difficulty: 'easy',

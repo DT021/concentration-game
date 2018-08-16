@@ -1,4 +1,6 @@
 import React from 'react';
+import get from 'lodash.get';
+import classnames from 'classnames';
 
 import styles from './Card.scss';
 
@@ -6,15 +8,28 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      up: props.up
+      up: get(props, 'initialPosition', false)
     };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  toggleCard() {
+    this.setState({up: !this.state.up});
+  }
+
+  handleClick() {
+    this.toggleCard();
   }
 
   render() {
-    const { card } = this.props;
+    const className = classnames(styles.card, {
+      [styles.facedown]: !this.state.up
+    });
+
     return (
-      <div className={styles.card}>
-        {card}
+      <div className={className} onClick={this.handleClick}>
+        {get(this.props, 'symbol', '').toString()}
       </div>
     );
   }
