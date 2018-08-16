@@ -22,7 +22,7 @@ app.use(express.static(path.join(process.cwd(), KYT.PUBLIC_DIR)))
 app.get('*', (request, response) => {
   response.send(
     template({
-      html: renderToString(<App />),
+      html: renderToString(<App/>),
       manifestJSBundle: clientAssets['manifest.js'],
       mainJSBundle: clientAssets['main.js'],
       vendorJSBundle: clientAssets['vendor.js'],

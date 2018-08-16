@@ -11,10 +11,10 @@ export default vo => `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     ${
-      vo.mainCSSBundle
-        ? '<link rel="stylesheet" type="text/css" href="' + vo.mainCSSBundle + '">'
-        : ''
-    }
+  vo.mainCSSBundle
+    ? '<link rel="stylesheet" type="text/css" href="' + vo.mainCSSBundle + '">'
+    : ''
+  }
 
     <title>NYT Games Web Code Test</title>
   </head>

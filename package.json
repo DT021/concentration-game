@@ -1,9 +1,8 @@
 {
   "name": "concentration-game",
   "author": "Julio Vila",
-  "description": "A game we won’t soon forget",
+  "description": "Concentration Game written in React",
   "version": "1.0.0",
-  "license": "SEE LICENSE IN LICENSE.md",
   "repository": {
     "type": "git",
     "url": "https://github.com/jcvilap/concentration-game.git"

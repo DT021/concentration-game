@@ -15,7 +15,7 @@ class Card extends React.Component {
   }
 
   toggleCard() {
-    this.setState({up: !this.state.up});
+    this.setState({ up: !this.state.up });
   }
 
   handleClick() {

@@ -46,7 +46,7 @@ class Options extends React.Component {
   render() {
     return (
       <div className={styles.options}>
-       <Link to="/game">Play</Link>
+        <Link to="/game">Play</Link>
       </div>
     );
   }
