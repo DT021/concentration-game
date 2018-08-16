@@ -65,7 +65,7 @@ Clone this repository and run `npm install`, then `npm run dev` in the root
 directory to start up the development server. Once it’s running, you can view
 the app at `localhost:3000`††.
 
-If you’re looking for somewhere to start, a good place to dive in is `Game.js`,
+If you’re looking for somewhere to start, a good place to dive in is `Card.js`,
 where we’ve left a placeholder `<div>` for you to build on. Good luck! We look
 forward to playing your game.
 
