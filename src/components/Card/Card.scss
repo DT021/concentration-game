@@ -1,9 +1,22 @@
 .card {
-  // base
+  width: 150px;
+  height: 250px;
+  flex: initial;
+  font-size: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  margin:10px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  user-select: none;
+  cursor: pointer;
+  transition: transform .5s;
 }
 
 .facedown {
   background-color: yellowgreen;
+  transform: rotateY( 180deg );
 }
 
 .small {

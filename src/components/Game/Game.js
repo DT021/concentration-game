@@ -40,22 +40,20 @@ const state = {
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
-      //
+      cardPositions: [...state.game.cardPositions]
     };
   }
 
+  // todo integrate with store instead
   handleCardClick(index) {
-    // todo integrate with store
-    const cardPositions = get(this.props, 'data.game.cardPositions', []);
-    cardPositions[index] = !!cardPositions[index];
-
+    const cardPositions = [...this.state.cardPositions];
+    cardPositions[index] = !cardPositions[index];
+    this.setState({ cardPositions });
   }
 
   render() {
     const cards = get(state, 'game.level.cards', []);
-    const cardPositions = get(state, 'game.cardPositions', []);
     return (
       <div>
         <Link to="/">Options</Link>
@@ -64,9 +62,9 @@ class Game extends React.Component {
         <div className={styles.placeholder}>
           {cards.map((card, i) => (
             <Card
-              initialPosition={cardPositions[i]}
+              discovered={this.state.cardPositions[i]}
               symbol={card}
-              onCardClick={this.handleCardClick.bind(this, i)}
+              onClick={this.handleCardClick.bind(this, i)}
             />
           ))}
         </div>

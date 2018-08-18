@@ -4,37 +4,14 @@ import classnames from 'classnames';
 
 import styles from './Card.scss';
 
-class Card extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      up: get(props, 'initialPosition', false)
-    };
+export default function Card(props) {
+  const className = classnames(styles.card, {
+    [styles.facedown]: !props.discovered
+  });
 
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  toggleCard() {
-    this.setState({ up: !this.state.up });
-  }
-
-  handleClick() {
-    this.toggleCard();
-  }
-
-  render() {
-    const className = classnames(styles.card, {
-      [styles.facedown]: !this.state.up
-    });
-
-    return (
-      <div className={className} onClick={this.handleClick}>
-        {get(this.props, 'symbol', '').toString()}
-      </div>
-    );
-  }
+  return (
+    <div className={className} onClick={props.onClick}>
+      {props.discovered && get(props, 'symbol', '').toString()}
+    </div>
+  );
 }
-
-Card.propTypes = {};
-
-export default Card;
