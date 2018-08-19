@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import styles from './Options.scss';
@@ -22,6 +22,6 @@ class Options extends React.Component {
 }
 
 
-const mapStateToProps = (state) => state.options;
-const connectedOptions = connect(mapStateToProps)(Options);
-export default connectedOptions;
+//const mapStateToProps = (state) => state.options;
+//const ConnectedOptions = withRouter(connect(mapStateToProps)(Options));
+export default Options;

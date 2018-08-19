@@ -1,8 +1,9 @@
-import {createStore, combineReducers} from 'redux';
+import { combineReducers } from 'redux'
 
 import game from './game';
 import options from './options';
 import levels from './levels';
+
 
 const rootReducer = combineReducers({
   game,
@@ -10,4 +11,5 @@ const rootReducer = combineReducers({
   levels
 });
 
-export default createStore(rootReducer);
+export default rootReducer;
+
