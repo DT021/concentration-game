@@ -1,7 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+import store from '../store/store';
 import App from '../components/App';
 
-const root = document.querySelector('#root');
-render(<App/>, root);
+render(
+  <App store={store}/>,
+  document.querySelector('#root')
+);

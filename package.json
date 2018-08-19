@@ -14,10 +14,13 @@
     "express": "4.16.2",
     "kyt": "0.9.0",
     "lodash.get": "^4.4.2",
+    "lodash.shuffle": "^4.2.0",
     "prop-types": "15.6.0",
     "react": "16.1.1",
     "react-dom": "16.1.1",
+    "react-redux": "^5.0.7",
     "react-router-dom": "4.4.0-alpha.1",
+    "redux": "^4.0.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5"
   },

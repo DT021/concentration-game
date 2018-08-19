@@ -1,59 +1,59 @@
 import React from 'react';
-import get from 'lodash.get';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Timer from '../Timer/Timer';
 import styles from './Game.scss';
 import Card from '../Card/Card.js';
 
-
-const state = {
-  levels: [
-    {
-      "cards": ["✈", "♘", "✈", "♫", "♫", "☆", "♘", "☆"],
-      "difficulty": "easy"
-    },
-    {
-      "cards": ["❄", "⍨", "♘", "✈", "☯", "♠", "☆", "❄", "♫", "♫", "☯", "☆", "✈", "⍨", "♠", "♘"],
-      "difficulty": "hard"
-    },
-    {
-      "cards": ["⍨", "✈", "☆", "♘", "⍨", "♫", "♠", "✈", "❄", "✈", "♘", "☆", "❄", "☯", "☯", "♫", "♠", "⍨", "☯", "☆", "❄", "♘", "♫", "♠"],
-      "difficulty": "triples"
-    } // separate rest call
-  ], // to be populated via rest calls
-  game: {
-    level: {
-      "cards": ["✈", "♘", "✈", "♫", "♫", "☆", "♘", "☆"],
-      "difficulty": "easy"
-    }, // collected from above upon selection,
-    clock: 0,  // last recorded time in milliseconds
-    failedAttempts: 0, // how many times the user failed trying to match cards
-    cardPositions: [false, false, true, false, true, false, false, false], // boolean array where true means card for that index is up
-  },
-  options: {
-    difficulty: 'easy',
-    // ... other stuff
-  }
-};
-
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardPositions: [...state.game.cardPositions]
+      cards: [...props.game.cards],
+      animationInProgress: false,
     };
   }
 
-  // todo integrate with store instead
   handleCardClick(index) {
-    const cardPositions = [...this.state.cardPositions];
-    cardPositions[index] = !cardPositions[index];
-    this.setState({ cardPositions });
+    const cards = [...this.state.cards];
+    const card = cards[index];
+
+    // Animation in progress ot card already discovered, do nothing
+    if (this.state.animationInProgress || card.discovered) {
+      return;
+    }
+
+    const selectedCardIndex = cards.findIndex(card => card.selected);
+
+    // No selected cards, select current
+    if (selectedCardIndex === -1) {
+      cards[index].selected = true;
+    }
+    // Current symbol matched with selected card's symbol, discover both
+    else if (card.symbol === cards[selectedCardIndex].symbol) {
+      cards[selectedCardIndex].selected = false;
+      cards[selectedCardIndex].discovered = true;
+      cards[index].discovered = true;
+    }
+    // No matches, un-discover all after selecting current
+    else {
+      cards[index].selected = true;
+      return this.setState({ cards, animationInProgress: true }, () => {
+        // Sett a small time out to allow for animation
+        setTimeout(() => {
+          cards[index].selected = false;
+          cards[selectedCardIndex].selected = false;
+          this.setState({ cards, animationInProgress: false });
+        }, 600);
+      });
+    }
+
+    this.setState({ cards });
   }
 
   render() {
-    const cards = get(state, 'game.level.cards', []);
+    const { cards } = this.state;
     return (
       <div>
         <Link to="/">Options</Link>
@@ -62,8 +62,7 @@ class Game extends React.Component {
         <div className={styles.placeholder}>
           {cards.map((card, i) => (
             <Card
-              discovered={this.state.cardPositions[i]}
-              symbol={card}
+              card={card}
               onClick={this.handleCardClick.bind(this, i)}
             />
           ))}
@@ -73,6 +72,5 @@ class Game extends React.Component {
   }
 }
 
-Game.propTypes = {};
-
-export default Game;
+const mapStateToProps = (state) => state.game;
+export default connect(mapStateToProps)(Game);
