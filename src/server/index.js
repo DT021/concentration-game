@@ -1,6 +1,7 @@
 import express from 'express';
 import compression from 'compression';
 import path from 'path';
+import cors from 'cors';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
@@ -19,6 +20,7 @@ app.disable('x-powered-by');
 
 // Compress (gzip) assets in production.
 app.use(compression());
+app.use(cors());
 
 // Setup the public directory so that we can server static assets.
 app.use(express.static(path.join(process.cwd(), KYT.PUBLIC_DIR)));
@@ -26,7 +28,7 @@ app.use(express.static(path.join(process.cwd(), KYT.PUBLIC_DIR)));
 app.get('*', (request, response) => {
   // Create a new Redux store instance
   const store = createStore(rootReducer, applyMiddleware(thunk));
-
+3
   // Render the component to a string
   const html = renderToString(
     <Provider store={store}>

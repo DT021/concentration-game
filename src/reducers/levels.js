@@ -19,10 +19,10 @@ const fetchLevelsAsync = () => {
   ]).then(([cards, triples]) => [...cards.data.levels, triples.data]);
 };
 
-export default (state = { levels: [] }, action) => {
+export default (state = [], action) => {
   switch (action.type) {
     case SET_LEVELS:
-      return Object.assign({}, state, { levels: action.payload });
+      return [...action.payload];
     default:
       return state;
   }

@@ -1,19 +1,51 @@
+$font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+
 .options {
+  font-family: $font;
   height: 100vh;
   background-color: yellowgreen;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
 
+.choices {
+  display: flex;
+}
+
+.choice {
+  display: flex;
+  margin: 25px;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.radio {
+  margin-bottom: 5px;
+  span {
+    margin-left: 10px;
+  }
+}
+
+.description {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.actions {
+  margin-top: 10px;
   a {
     background-color: #333333;
     color: white;
-    font-size: 40px;
+    font-size: 35px;
     text-indent: 50px;
     text-decoration: none;
     width: 200px;
     height: 40px;
-    padding: 5px;
+    order: 2;
+    padding: 10px 20px;
     text-transform: uppercase;
+    margin-right: 20px;
   }
 }
+

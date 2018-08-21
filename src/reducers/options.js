@@ -1,11 +1,4 @@
-const initialState = {
-  options: {
-    difficulty: 'easy',
-    // ... other stuff
-  }
-};
-
-export default (state = initialState, action) => {
+export default (state = null, action) => {
   return state;
 
   switch (action.type) {
