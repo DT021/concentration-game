@@ -21,6 +21,9 @@ export default vo => `<!DOCTYPE html>
 
   <body>
     <div id="root"><div>${vo.html}</div></div>
+    <script>
+      window.PRELOADED_STATE = ${JSON.stringify(vo.preloadedState).replace(/</g, '\\\\\u003c')}
+    </script>
     ${getDeferScript(vo.manifestJSBundle)}
     ${getDeferScript(vo.vendorJSBundle)}
     ${getDeferScript(vo.mainJSBundle)}

@@ -8,6 +8,7 @@
     "url": "https://github.com/jcvilap/concentration-game.git"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-preset-kyt-react": "0.3.0",
     "classnames": "^2.2.6",
     "compression": "1.7.1",
@@ -21,8 +22,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "4.4.0-alpha.1",
     "redux": "^4.0.0",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.5"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "enzyme": "3.2.0",

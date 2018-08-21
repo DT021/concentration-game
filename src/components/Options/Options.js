@@ -22,6 +22,6 @@ class Options extends React.Component {
 }
 
 
-//const mapStateToProps = (state) => state.options;
-//const ConnectedOptions = withRouter(connect(mapStateToProps)(Options));
-export default Options;
+const mapStateToProps = ({ options, levels }) => ({ options, levels });
+const ConnectedOptions = withRouter(connect(mapStateToProps)(Options));
+export default ConnectedOptions;

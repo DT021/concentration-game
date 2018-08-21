@@ -6,17 +6,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  margin:10px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.05);
   user-select: none;
   cursor: pointer;
   transition: transform .5s;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 10px, rgba(0, 0, 0, 0.23) 0 3px 10px;
 }
 
 .facedown {
   background-color: yellowgreen;
-  transform: rotateY( 180deg );
+  transform: rotateY(180deg);
 }
 
 .small {
