@@ -6,9 +6,9 @@ export const SET_LEVELS = 'SET_LEVELS';
 
 export const setLevels = (levels) => ({ type: SET_LEVELS, payload: levels });
 export const fetchLevels = () => {
-  return () => {
+  return (dispatch) => {
     fetchLevelsAsync()
-      .then(levels => setLevels(levels))
+      .then(levels => dispatch(setLevels(levels)))
   };
 };
 
