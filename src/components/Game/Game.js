@@ -22,9 +22,9 @@ class Game extends React.Component {
     if (state.previous && this.props.options.clock) {
       return this.props.options;
     }
-    const level = this.props.levels.find(({difficulty}) => difficulty === state.difficulty);
-    const cards = level.cards.map(symbol => ({symbol, discovered: false, selected: false}));
-    return {level, cards, clock: 0, failedAttempts: 0};
+    const level = this.props.levels.find(({ difficulty }) => difficulty === state.difficulty);
+    const cards = level.cards.map(symbol => ({ symbol, discovered: false, selected: false }));
+    return { level, cards, clock: 0, failedAttempts: 0 };
   }
 
   handleCardClick(index) {
@@ -67,10 +67,12 @@ class Game extends React.Component {
   render() {
     const { cards } = this.state;
     return (
-      <div>
-        <Link to="/">Options</Link>
-        <h1 className={styles.header}>NYT Games Code Test</h1>
-        <Timer/>
+      <div className={styles.game}>
+        <div className={styles.toolbar}>
+          <Link to="/">← Options</Link>
+          <div className={styles.message}>Your game will be saved</div>
+          <Timer/>
+        </div>
         <div className={styles.placeholder}>
           {cards.map((card, i) => (
             <Card
