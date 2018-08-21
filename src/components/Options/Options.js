@@ -51,7 +51,7 @@ class Options extends React.Component {
         </div>
         <div className={styles.actions}>
           <Link to={{ pathname: '/game', state: { difficulty: this.state.difficulty } }}>Play</Link>
-          {this.props.options.clock && <Link to={{ pathname: '/game', state: { previous: true } }}>Resume Last Game</Link>}
+          {this.props.options.level && <Link to={{ pathname: '/game', state: { previous: true } }}>Resume</Link>}
         </div>
       </div>
     );

@@ -17,6 +17,11 @@ class Game extends React.Component {
     };
   }
 
+  componentWillUnmount() {
+    const { animationInProgress, ...options } = this.state;
+    this.props.setOptions(options);
+  }
+
   initGame() {
     const state = get(this.props, 'location.state');
     if (state.previous && this.props.options.clock) {
