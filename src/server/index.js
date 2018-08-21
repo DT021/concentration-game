@@ -28,7 +28,7 @@ app.use(express.static(path.join(process.cwd(), KYT.PUBLIC_DIR)));
 app.get('*', (request, response) => {
   // Create a new Redux store instance
   const store = createStore(rootReducer, applyMiddleware(thunk));
-3
+
   // Render the component to a string
   const html = renderToString(
     <Provider store={store}>

@@ -1,18 +1,30 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import get from 'lodash.get';
 
 import Timer from '../Timer/Timer';
 import styles from './Game.scss';
-import Card from '../Card/Card.js';
+import Card from '../Card/Card';
+import { setOptions } from '../../reducers/options';
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: [...props.game.cards],
+      ...this.initGame(),
       animationInProgress: false,
     };
+  }
+
+  initGame() {
+    const state = get(this.props, 'location.state');
+    if (state.previous && this.props.options.clock) {
+      return this.props.options;
+    }
+    const level = this.props.levels.find(({difficulty}) => difficulty === state.difficulty);
+    const cards = level.cards.map(symbol => ({symbol, discovered: false, selected: false}));
+    return {level, cards, clock: 0, failedAttempts: 0};
   }
 
   handleCardClick(index) {
@@ -72,6 +84,7 @@ class Game extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => state.game;
-const ConnectedGame = withRouter(connect(mapStateToProps)(Game));
+const mapStateToProps = ({ levels, options }) => ({ levels, options });
+const mapDispatchToProps = { setOptions };
+const ConnectedGame = withRouter(connect(mapStateToProps, mapDispatchToProps)(Game));
 export default ConnectedGame;

@@ -40,6 +40,8 @@ class Options extends React.Component {
                   type="radio"
                   value={difficulty}
                   checked={this.state.difficulty === difficulty}
+                  onChange={() => {
+                  }}
                 />
                 <span>{difficulty.toUpperCase()}</span>
               </div>
@@ -48,8 +50,8 @@ class Options extends React.Component {
           ))}
         </div>
         <div className={styles.actions}>
-          <Link to="/game">Play</Link>
-          {this.props.options && <Link to="/game?previous=true">Resume Last Game</Link>}
+          <Link to={{ pathname: '/game', state: { difficulty: this.state.difficulty } }}>Play</Link>
+          {this.props.options.clock && <Link to={{ pathname: '/game', state: { previous: true } }}>Resume Last Game</Link>}
         </div>
       </div>
     );
