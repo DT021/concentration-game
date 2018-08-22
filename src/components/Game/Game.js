@@ -34,37 +34,86 @@ class Game extends React.Component {
   }
 
   handleCardClick(index) {
-    const cards = [...this.state.cards];
+    const { cards, level: { difficulty } } = this.state;
     const card = cards[index];
 
     // Animation in progress or card already discovered, do nothing
     if (this.state.animationInProgress || card.discovered) {
       return;
     }
-
-    const selectedCardIndex = cards.findIndex(card => card.selected);
-
+    // Fetch selected cards
+    const selectedCards = cards.filter(card => card.selected);
     // No selected cards, select current
-    if (selectedCardIndex === -1) {
+    if (!selectedCards.length) {
       cards[index].selected = true;
     }
-    // Current symbol matched with selected card's symbol, discover both
-    else if (card.symbol === cards[selectedCardIndex].symbol) {
-      cards[selectedCardIndex].selected = false;
-      cards[selectedCardIndex].discovered = true;
-      cards[index].discovered = true;
+    // Matching pairs logic
+    else if (difficulty !== 'triples') {
+      const selectedCardIndex = cards.findIndex(card => card.selected);
+      // Current symbol matched with selected card's symbol, discover both
+      if (card.symbol === cards[selectedCardIndex].symbol) {
+        cards[selectedCardIndex].selected = false;
+        cards[selectedCardIndex].discovered = true;
+        cards[index].discovered = true;
+      }
+      // No matches, un-discover all after selecting current
+      else {
+        cards[index].selected = true;
+        return this.setState({ cards, animationInProgress: true }, () => {
+          // Sett a small time out to allow for animation
+          setTimeout(() => {
+            cards[index].selected = false;
+            cards[selectedCardIndex].selected = false;
+            this.setState({ cards, animationInProgress: false });
+          }, 600);
+        });
+      }
     }
-    // No matches, un-discover all after selecting current
-    else {
-      cards[index].selected = true;
-      return this.setState({ cards, animationInProgress: true }, () => {
-        // Sett a small time out to allow for animation
-        setTimeout(() => {
-          cards[index].selected = false;
-          cards[selectedCardIndex].selected = false;
-          this.setState({ cards, animationInProgress: false });
-        }, 600);
-      });
+    // Matching triples logic
+    else if (difficulty === 'triples') {
+      // Only one card selected, select current one
+      if (selectedCards.length === 1) {
+        const firstIndex = cards.indexOf(selectedCards[0]);
+        if(card.symbol === cards[firstIndex].symbol) {
+          cards[index].selected = true;
+        } else {
+          cards[index].selected = true;
+          return this.setState({ cards, animationInProgress: true }, () => {
+            // Sett a small time out to allow for animation
+            setTimeout(() => {
+              cards[index].selected = false;
+              cards[firstIndex].selected = false;
+              this.setState({ cards, animationInProgress: false });
+            }, 600);
+          });
+        }
+      }
+      // Two cards selected...
+      else if (selectedCards.length === 2) {
+        const firstIndex = cards.indexOf(selectedCards[0]);
+        const secondIndex = cards.indexOf(selectedCards[1]);
+        // Matching symbols, discover all three
+        if (card.symbol === cards[firstIndex].symbol && card.symbol === cards[secondIndex].symbol) {
+          cards[firstIndex].selected = false;
+          cards[secondIndex].selected = false;
+          cards[firstIndex].discovered = true;
+          cards[secondIndex].discovered = true;
+          cards[index].discovered = true;
+        }
+        // No matches, un-discover all after selecting current
+        else {
+          cards[index].selected = true;
+          return this.setState({ cards, animationInProgress: true }, () => {
+            // Sett a small time out to allow for animation
+            setTimeout(() => {
+              cards[index].selected = false;
+              cards[firstIndex].selected = false;
+              cards[secondIndex].selected = false;
+              this.setState({ cards, animationInProgress: false });
+            }, 600);
+          });
+        }
+      }
     }
 
     this.setState({ cards });
