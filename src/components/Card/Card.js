@@ -6,8 +6,8 @@ import styles from './Card.scss';
 export default function Card(props) {
   const { symbol, discovered, selected } = props.card;
   const faceUp = (discovered || selected);
-  const className = classnames(styles.card, {
-    [styles.facedown]: !faceUp
+  const className = classnames(styles.card, styles[props.difficulty], {
+    [styles.facedown]: !faceUp,
   });
 
   return (

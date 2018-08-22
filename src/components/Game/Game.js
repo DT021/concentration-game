@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import get from 'lodash.get';
+import classnames from 'classnames';
 
 import Timer from '../Timer/Timer';
 import styles from './Game.scss';
@@ -36,7 +37,7 @@ class Game extends React.Component {
     const cards = [...this.state.cards];
     const card = cards[index];
 
-    // Animation in progress ot card already discovered, do nothing
+    // Animation in progress or card already discovered, do nothing
     if (this.state.animationInProgress || card.discovered) {
       return;
     }
@@ -70,7 +71,9 @@ class Game extends React.Component {
   }
 
   render() {
-    const { cards } = this.state;
+    const { cards, level: { difficulty } } = this.state;
+    const containerStyle = classnames(styles.container, styles[difficulty]);
+
     return (
       <div className={styles.game}>
         <div className={styles.toolbar}>
@@ -79,12 +82,15 @@ class Game extends React.Component {
           <Timer/>
         </div>
         <div className={styles.placeholder}>
-          {cards.map((card, i) => (
-            <Card
-              card={card}
-              onClick={this.handleCardClick.bind(this, i)}
-            />
-          ))}
+          <div className={containerStyle}>
+            {cards.map((card, i) => (
+              <Card
+                card={card}
+                difficulty={difficulty}
+                onClick={this.handleCardClick.bind(this, i)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );

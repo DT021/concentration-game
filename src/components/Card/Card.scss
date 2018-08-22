@@ -1,6 +1,4 @@
 .card {
-  width: 150px;
-  height: 250px;
   flex: initial;
   font-size: 80px;
   display: flex;
@@ -20,20 +18,20 @@
   transform: rotateY(180deg);
 }
 
-.small {
-  font-size: 15px;
-  height: 150px;
-  width: 75px;
-}
-
-.medium {
-  font-size: 20px;
-  height: 200px;
-  width: 100px;
-}
-
-.large {
-  font-size: 25px;
-  height: 300px;
+.easy {
+  flex:1 0 20%;
   width: 150px;
+  height: 250px;
+}
+
+.hard {
+  width: 120px;
+  height: 200px;
+  flex:1 0 20%;
+}
+
+.triples {
+  width: 120px;
+  height: 200px;
+  flex:1 0 12%;
 }

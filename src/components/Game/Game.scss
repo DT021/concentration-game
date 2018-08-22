@@ -22,14 +22,33 @@ $font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 .placeholder {
-  font-style: $font;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   padding: 10px;
   background: rgba(0, 0, 0, 0.65);
   height: calc(100vh - 118px);
+  min-width: 550px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.easy {
+  width: 680px;
+}
+
+.hard {
+  width: 600px;
+}
+
+.triples {
+  width: 800px;
 }
 
 .message {
