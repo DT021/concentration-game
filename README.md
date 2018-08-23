@@ -2,7 +2,7 @@
 # Concentration Game
 
 * Pick a level, and hit the ```PLAY``` button
-* Interact with the cards according to the game instructions. Note that if you picked triple in the above step you wouyld need to match 3 cards instead of 2
+* Interact with the cards according to the game [instructions](https://en.wikipedia.org/wiki/Concentration_(game)). Note that if you picked ```TRIPLES``` in the above step you wouyld need to match 3 cards instead of 2
 * Pause your timer anytime by hitting the ```OPTIONS``` button
 * Observe the last 10 games played and some stats about them
 
@@ -14,7 +14,7 @@
 
 # Setup instructions
 
-* Same as original instructions, ```npm i``` and then ```npm run dev```
+* ```npm i``` and then ```npm run dev```
 
 # Notes
 
