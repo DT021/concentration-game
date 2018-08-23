@@ -8,12 +8,13 @@
 
 ## Some Screen Shots
 
-![Start](github_assets/Screen%20Shot%202018-08-23%20at%203.04.35%20AM.png)
+![Start Game](github_assets/Screen%20Shot%202018-08-23%20at%203.08.29%20AM.png)
 ![Easy Game](github_assets/Screen%20Shot%202018-08-23%20at%203.04.53%20AM.png)
+![Resume Game](github_assets/Screen%20Shot%202018-08-23%20at%203.04.35%20AM.png)
 
 # Setup instructions
 
-* Same as originals, ```npm i``` and then ```npm run dev```
+* Same as original instructions, ```npm i``` and then ```npm run dev```
 
 # Notes
 
