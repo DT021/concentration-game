@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import get from 'lodash.get';
 import classnames from 'classnames';
 import uuid from 'uuid/v4';
+import PropTypes from 'prop-types';
 
 import Timer from '../Timer/Timer';
 import styles from './Game.scss';
@@ -50,14 +51,14 @@ class Game extends React.Component {
       return;
     }
     // Fetch selected cards
-    const selectedCards = cards.filter(card => card.selected);
+    const selectedCards = cards.filter(c => c.selected);
     // No selected cards, select current
     if (!selectedCards.length) {
       cards[index].selected = true;
     }
     // Matching pairs logic
     else if (difficulty !== 'triples') {
-      const selectedCardIndex = cards.findIndex(card => card.selected);
+      const selectedCardIndex = cards.findIndex(c => c.selected);
       // Current symbol matched with selected card's symbol, discover both
       if (card.symbol === cards[selectedCardIndex].symbol) {
         cards[selectedCardIndex].selected = false;
@@ -159,7 +160,7 @@ class Game extends React.Component {
                 key={card.symbol + i}
                 card={card}
                 difficulty={difficulty}
-                onClick={this.handleCardClick.bind(this, i)}
+                onClick={() => this.handleCardClick(i)}
               />
             ))}
           </div>
@@ -168,6 +169,12 @@ class Game extends React.Component {
     );
   }
 }
+
+Game.propTypes = {
+  levels: PropTypes.array,
+  options: PropTypes.object,
+  setOptions: PropTypes.func,
+};
 
 const mapStateToProps = ({ levels, options }) => ({ levels, options });
 const mapDispatchToProps = { setOptions };

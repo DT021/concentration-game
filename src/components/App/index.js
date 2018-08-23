@@ -1,6 +1,7 @@
 import React from 'react';
 import { MemoryRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { fetchLevels } from '../../reducers/levels';
 import { initOptions } from '../../reducers/options';
@@ -8,10 +9,6 @@ import Game from '../Game/Game';
 import Options from '../Options/Options';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillMount() {
     this.props.fetchLevels();
   }
@@ -31,6 +28,11 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  fetchLevels: PropTypes.func,
+  initOptions: PropTypes.func
+};
 
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = { fetchLevels, initOptions };

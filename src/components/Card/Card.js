@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 import styles from './Card.scss';
 
@@ -11,8 +12,14 @@ export default function Card(props) {
   });
 
   return (
-    <div className={className} onClick={props.onClick}>
+    <div className={className} onClick={props.onClick} role="presentation">
       {faceUp && symbol.toString()}
     </div>
   );
 }
+
+Card.propTypes = {
+  card: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  difficulty: PropTypes.string,
+  onClick: PropTypes.func,
+};

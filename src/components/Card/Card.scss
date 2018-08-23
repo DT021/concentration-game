@@ -9,7 +9,7 @@
   margin: 10px;
   user-select: none;
   cursor: pointer;
-  transition: transform .5s;
+  transition: transform 0.5s;
   box-shadow: rgba(0, 0, 0, 0.16) 0 3px 10px, rgba(0, 0, 0, 0.23) 0 3px 10px;
 }
 
@@ -36,16 +36,9 @@
   flex: 1 0 12%;
 }
 
-@media only screen and (max-height: 600px) {
+@media only screen and (max-height: 800px) {
   .easy {
     height: 120px;
-    font-size: 40px;
-  }
-}
-
-@media only screen and (max-height: 800px) {
-  .hard {
-    height: 100px;
     font-size: 40px;
   }
 }
@@ -53,6 +46,11 @@
 @media only screen and (max-height: 1000px) {
   .triples {
     height: 80px;
+    font-size: 40px;
+  }
+
+  .hard {
+    height: 100px;
     font-size: 40px;
   }
 }

@@ -1,6 +1,10 @@
-// Base kyt config.
-// Edit these properties to make changes.
+const path = require('path');
 
 module.exports = {
-  debug: true,
+  //debug: true,
+  modifyJestConfig: baseConfig => {
+    const jestConfig = Object.assign({}, baseConfig);
+    jestConfig.setupTestFrameworkScriptFile = path.resolve(__dirname, 'test.config.js');
+    return jestConfig
+  },
 };

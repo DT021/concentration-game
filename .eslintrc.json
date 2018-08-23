@@ -5,14 +5,12 @@
     "no-return-assign": ["error", "except-parens"],
     "import/no-restricted-paths": "off",
     "react/require-default-props": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "printWidth": 100,
-        "semi": false,
-        "singleQuote": true,
-        "trailingComma": "es5"
-      }
-    ]
+    "prettier/prettier": "off",
+    "comma-dangle": "off",
+    "consistent-return": "off",
+    "react/forbid-prop-types": "off",
+    "react/no-array-index-key": "off",
+    "class-methods-use-this": "off",
+    "react/no-unused-prop-types": "off"
   }
 }

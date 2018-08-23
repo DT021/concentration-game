@@ -6,12 +6,12 @@ $font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 .toolbar {
-  padding: 30px 25px 35px 25px;
+  padding: 30px 25px 35px;
   display: flex;
   flex-direction: row;
 
   a {
-    background-color: #333333;
+    background-color: #333;
     color: white;
     font-size: 18px;
     border: 1px solid;
@@ -25,10 +25,13 @@ $font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 
 .toolbarItem {
   margin-left: 100px;
-  &:first-child, &:nth-child(2) {
+
+  &:first-child,
+  &:nth-child(2) {
     margin-left: 0;
     flex-grow: 1;
   }
+
   &:nth-child(2) {
     color: yellowgreen;
   }

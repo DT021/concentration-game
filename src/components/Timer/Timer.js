@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import styles from './Timer.scss'
+import styles from './Timer.scss';
 
 export const formatTime = time => {
   if (time < 0) {
@@ -22,8 +22,6 @@ const Timer = ({ time = 0 }) => <div className={styles.timer}>{formatTime(time)}
 
 Timer.propTypes = {
   time: PropTypes.number,
-  stop: PropTypes.bool,
-  onTick: PropTypes.func,
 };
 
 class TimerContainer extends React.Component {
@@ -55,5 +53,12 @@ class TimerContainer extends React.Component {
     return <Timer time={this.props.time || this.state.secondsElapsed}/>;
   }
 }
+
+
+TimerContainer.propTypes = {
+  time: PropTypes.number,
+  stop: PropTypes.bool,
+  onTick: PropTypes.func,
+};
 
 export default TimerContainer;
