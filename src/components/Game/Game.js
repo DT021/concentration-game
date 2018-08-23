@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import get from 'lodash.get';
 import classnames from 'classnames';
+import uuid from 'uuid/v4';
 
 import Timer from '../Timer/Timer';
 import styles from './Game.scss';
@@ -16,25 +17,32 @@ class Game extends React.Component {
       ...this.initGame(),
       animationInProgress: false,
     };
+
+    this.handleTick = this.handleTick.bind(this);
   }
 
   componentWillUnmount() {
-    const { animationInProgress, ...options } = this.state;
-    this.props.setOptions(options);
+    // Save state
+    this.props.setOptions({ ...this.state });
   }
 
   initGame() {
     const state = get(this.props, 'location.state');
-    if (state.previous && this.props.options.clock) {
-      return this.props.options;
+    if (state.previous && this.props.options.currentGame) {
+      return this.props.options.currentGame;
     }
+    const id = uuid();
     const level = this.props.levels.find(({ difficulty }) => difficulty === state.difficulty);
     const cards = level.cards.map(symbol => ({ symbol, discovered: false, selected: false }));
-    return { level, cards, clock: 0, failedAttempts: 0 };
+    return { id, level, cards, clock: 0, failedAttempts: 0 };
+  }
+
+  handleTick() {
+    this.setState({ clock: this.state.clock + 1 });
   }
 
   handleCardClick(index) {
-    const { cards, level: { difficulty } } = this.state;
+    const { cards, level: { difficulty }, failedAttempts } = this.state;
     const card = cards[index];
 
     // Animation in progress or card already discovered, do nothing
@@ -59,7 +67,7 @@ class Game extends React.Component {
       // No matches, un-discover all after selecting current
       else {
         cards[index].selected = true;
-        return this.setState({ cards, animationInProgress: true }, () => {
+        return this.setState({ cards, animationInProgress: true, failedAttempts: failedAttempts + 1 }, () => {
           // Sett a small time out to allow for animation
           setTimeout(() => {
             cards[index].selected = false;
@@ -74,7 +82,7 @@ class Game extends React.Component {
       // Only one card selected, select current one
       if (selectedCards.length === 1) {
         const firstIndex = cards.indexOf(selectedCards[0]);
-        if(card.symbol === cards[firstIndex].symbol) {
+        if (card.symbol === cards[firstIndex].symbol) {
           cards[index].selected = true;
         } else {
           cards[index].selected = true;
@@ -103,7 +111,7 @@ class Game extends React.Component {
         // No matches, un-discover all after selecting current
         else {
           cards[index].selected = true;
-          return this.setState({ cards, animationInProgress: true }, () => {
+          return this.setState({ cards, animationInProgress: true, failedAttempts: failedAttempts + 1 }, () => {
             // Sett a small time out to allow for animation
             setTimeout(() => {
               cards[index].selected = false;
@@ -120,20 +128,35 @@ class Game extends React.Component {
   }
 
   render() {
-    const { cards, level: { difficulty } } = this.state;
+    const { cards, level: { difficulty }, failedAttempts, clock } = this.state;
     const containerStyle = classnames(styles.container, styles[difficulty]);
+    const gameWon = cards.every(card => card.discovered);
 
     return (
       <div className={styles.game}>
         <div className={styles.toolbar}>
-          <Link to="/">← Options</Link>
-          <div className={styles.message}>Your game will be saved</div>
-          <Timer/>
+          <div className={styles.toolbarItem}>
+            <Link to="/">← Options</Link>
+            <div className={styles.message}>Your game will be saved</div>
+          </div>
+          <div className={styles.toolbarItem} style={{ visibility: gameWon ? 'inherit' : 'hidden' }}>
+            <div className={styles.toolbarItemValue}>You Are a Winner!</div>
+            <div className={styles.toolbarItemLabel}>Please go back to options to start a new game</div>
+          </div>
+          <div className={styles.toolbarItem}>
+            <div className={styles.toolbarItemValue}>{failedAttempts}</div>
+            <div className={styles.toolbarItemLabel}>Failed attempts</div>
+          </div>
+          <div className={styles.toolbarItem}>
+            <Timer onTick={this.handleTick} stop={gameWon} time={clock}/>
+            <div className={styles.toolbarItemLabel}>Time spent</div>
+          </div>
         </div>
         <div className={styles.placeholder}>
           <div className={containerStyle}>
             {cards.map((card, i) => (
               <Card
+                key={card.symbol + i}
                 card={card}
                 difficulty={difficulty}
                 onClick={this.handleCardClick.bind(this, i)}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import get from 'lodash.get';
 
 import styles from './Options.scss';
 
@@ -30,6 +31,8 @@ class Options extends React.Component {
   }
 
   render() {
+    const showResume = !get(this.props, 'options.currentGame.gameWon', true);
+    const previousGames = Object.values(get(this.props, 'options.previousGames', {}));
     return (
       <div className={styles.options}>
         <div className={styles.choices}>
@@ -51,8 +54,32 @@ class Options extends React.Component {
         </div>
         <div className={styles.actions}>
           <Link to={{ pathname: '/game', state: { difficulty: this.state.difficulty } }}>Play</Link>
-          {this.props.options.level && <Link to={{ pathname: '/game', state: { previous: true } }}>Resume</Link>}
+          {showResume && <Link to={{ pathname: '/game', state: { previous: true } }}>Resume</Link>}
         </div>
+        {previousGames.length && <div className={styles.previousGames}>
+          <table>
+            <thead>
+            <tr>
+              <th>When</th>
+              <th>Difficulty</th>
+              <th>Time Spent</th>
+              <th>Failed Attempts</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {Object.values(this.props.options.previousGames).map(({ level, clock, failedAttempts, gameWon, when }, i) => (
+              <tr key={i}>
+                <td>{when}</td>
+                <td>{level.difficulty}</td>
+                <td>{clock}</td>
+                <td>{failedAttempts}</td>
+                <td>{gameWon ? 'Finished' : 'In Progress'}</td>
+              </tr>
+            ))}
+            </tbody>
+          </table>
+        </div>}
       </div>
     );
   }

@@ -22,6 +22,8 @@ const Timer = ({ time = 0 }) => <div className={styles.timer}>{formatTime(time)}
 
 Timer.propTypes = {
   time: PropTypes.number,
+  stop: PropTypes.bool,
+  onTick: PropTypes.func,
 };
 
 class TimerContainer extends React.Component {
@@ -41,13 +43,16 @@ class TimerContainer extends React.Component {
   }
 
   tick() {
-    this.setState({
-      secondsElapsed: this.state.secondsElapsed + 1,
-    });
+    if (!this.props.stop) {
+      this.props.onTick();
+      this.setState({
+        secondsElapsed: this.state.secondsElapsed + 1,
+      });
+    }
   }
 
   render() {
-    return <Timer time={this.state.secondsElapsed}/>;
+    return <Timer time={this.props.time || this.state.secondsElapsed}/>;
   }
 }
 

@@ -3,6 +3,7 @@ import { MemoryRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { fetchLevels } from '../../reducers/levels';
+import { initOptions } from '../../reducers/options';
 import Game from '../Game/Game';
 import Options from '../Options/Options';
 
@@ -12,7 +13,11 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchLevels &&  this.props.fetchLevels();
+    this.props.fetchLevels();
+  }
+
+  componentDidMount() {
+    this.props.initOptions();
   }
 
   render() {
@@ -28,7 +33,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => state;
-const mapDispatchToProps = { fetchLevels };
+const mapDispatchToProps = { fetchLevels, initOptions };
 const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 export default ConnectedApp;
 

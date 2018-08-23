@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
-import { applyMiddleware, createStore, bindActionCreators } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import get from 'lodash.get';
 
 import rootReducer from '../reducers/root';

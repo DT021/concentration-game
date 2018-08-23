@@ -2,6 +2,13 @@ $font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 
 .game {
   font-family: $font;
+  min-width: 600px;
+}
+
+.toolbar {
+  padding: 30px 25px 35px 25px;
+  display: flex;
+  flex-direction: row;
 
   a {
     background-color: #333333;
@@ -11,14 +18,28 @@ $font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     text-decoration: none;
     width: 200px;
     height: 40px;
-    order: 2;
     padding: 10px 20px;
     margin-right: 20px;
   }
 }
 
-.toolbar {
-  padding: 30px 25px 50px 25px;
+.toolbarItem {
+  margin-left: 100px;
+  &:first-child, &:nth-child(2) {
+    margin-left: 0;
+    flex-grow: 1;
+  }
+  &:nth-child(2) {
+    color: yellowgreen;
+  }
+}
+
+.toolbarItemLabel {
+  @extend .message;
+}
+
+.toolbarItemValue {
+  font-size: 30px;
 }
 
 .placeholder {
@@ -27,11 +48,12 @@ $font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   justify-content: center;
   padding: 10px;
   background: rgba(0, 0, 0, 0.65);
-  height: calc(100vh - 118px);
+  height: calc(100vh - 115px);
   min-width: 550px;
 }
 
 .container {
+  min-width: 600px;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -56,4 +78,16 @@ $font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   top: 69px;
   font-size: 12px;
   color: rgba(0, 0, 0, 0.8);
+}
+
+@media only screen and (max-width: 768px) {
+  .toolbarItem {
+    &:nth-child(2) {
+      display: none;
+    }
+  }
+
+  .hard {
+    width: 500px;
+  }
 }

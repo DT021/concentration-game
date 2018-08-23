@@ -1,6 +1,7 @@
 $font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 
 .options {
+  min-width: 600px;
   font-family: $font;
   height: 100vh;
   background-color: yellowgreen;
@@ -36,19 +37,38 @@ $font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 .actions {
-  margin-top: 10px;
+  display: flex;
+  margin: 10px 0 60px 0;
   a {
     background-color: #333333;
     color: white;
     font-size: 35px;
-    text-indent: 50px;
     text-decoration: none;
-    width: 200px;
-    height: 40px;
-    order: 2;
+    -webkit-box-ordinal-group: 3;
     padding: 10px 20px;
     text-transform: uppercase;
     margin-right: 20px;
+    height: 35px;
   }
 }
 
+.previousGames {
+  color: rgba(0, 0, 0, 0.75);
+  width: calc(100% - 50px);
+  max-width: 710px;
+  table {
+    width: 100%;
+    text-align: left;
+    th {
+      color: rgba(0, 0, 0, 0.7);
+    }
+    th, td {
+      padding: 10px;
+    }
+  }
+  thead > tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+}

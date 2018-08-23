@@ -32,7 +32,7 @@ app.get('*', (request, response) => {
   // Render the component to a string
   const html = renderToString(
     <Provider store={store}>
-      <App />
+      <App/>
     </Provider>
   );
 
