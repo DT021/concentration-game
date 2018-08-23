@@ -8,9 +8,8 @@
 
 ## Some Screen Shots
 
-![Start](https://cl.ly/31a646237cedg)
-![Easy Game](https://cl.ly/37ec052b6fec)
-![Resume Game](https://cl.ly/10754ebb6ba1)
+![Start](github_assets/Screen%20Shot%202018-08-23%20at%203.04.35%20AM.png)
+![Easy Game](github_assets/Screen%20Shot%202018-08-23%20at%203.04.53%20AM.png)
 
 # Setup instructions
 
